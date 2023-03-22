@@ -1,0 +1,36 @@
+enum Band {
+  b2190m,
+  b630m,
+  b160m,
+  b80m,
+  b60m,
+  b40m,
+  b30m,
+  b20m,
+  b17m,
+  b15m,
+  b12m,
+  b10m,
+  b6m,
+  b4m,
+  b2m,
+  b1_25m,
+  b70cm,
+  b33cm,
+  b23cm,
+  b13cm,
+  b9cm,
+  b6cm,
+  b4cm,
+  b3cm,
+  b1_25cm,
+  b6mm,
+  b4mm,
+  b2_5mm,
+  b2mm,
+  b1mm,
+  bsubmm;
+
+  @override
+  String toString() => name.substring(1).replaceAll('_', '.');
+}
