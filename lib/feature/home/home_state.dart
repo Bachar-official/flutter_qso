@@ -14,7 +14,7 @@ class HomeState {
         locale = 'en',
         pageNumber = 0;
 
-  HomeState copyWith(String? callsign, String? locale, int? pageNumber) =>
+  HomeState copyWith({String? callsign, String? locale, int? pageNumber}) =>
       HomeState(
           callsign: callsign ?? this.callsign,
           locale: locale ?? this.locale,

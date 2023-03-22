@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'app/app.dart';
+import 'app/di.dart';
 
-void main() {
-  runApp(const App());
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox('settings');
+  di.init();
+  runApp(
+    const ProviderScope(
+      child: App(),
+    ),
+  );
 }

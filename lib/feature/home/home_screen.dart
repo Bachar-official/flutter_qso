@@ -1,10 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_qso/app/di.dart';
+import 'package:flutter_qso/feature/home/home_state_holder.dart';
+import 'package:flutter_qso/feature/log/log_screen.dart';
+import 'package:flutter_qso/feature/profile/profile_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeScreen extends StatelessWidget {
+import 'home_state.dart';
+
+final homeProvider = StateNotifierProvider<HomeStateHolder, HomeState>(
+    (ref) => di.homeStateHolder);
+
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(homeProvider);
+    final manager = di.homeManager;
+    return Scaffold(
+      body: <Widget>[
+        const LogScreen(),
+        const ProfileScreen(),
+      ][state.pageNumber],
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: manager.setPageNumber,
+        selectedIndex: state.pageNumber,
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.table_rows), label: 'Log'),
+          NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
+        ],
+      ),
+    );
   }
 }
