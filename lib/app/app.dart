@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_qso/app/di.dart';
 import 'package:flutter_qso/app/routing.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_qso/feature/profile/profile_state.dart';
+import 'package:flutter_qso/feature/profile/profile_state_holder.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class App extends StatelessWidget {
+final profileProvider = StateNotifierProvider<ProfileStateHolder, ProfileState>((ref) => di.profileStateHolder);
+
+class App extends ConsumerWidget {
   const App({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(profileProvider);
+    return MaterialApp(
       title: 'QSO',
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: [
-        Locale('en'),
-        Locale('ru'),
-      ],
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       onGenerateRoute: AppRouter.generateRoute,
+      locale: Locale(state.locale),
     );
   }
 }

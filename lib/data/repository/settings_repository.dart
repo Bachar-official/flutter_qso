@@ -1,7 +1,7 @@
-import 'package:hive_flutter/adapters.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class SettingsRepository {
-  late Box _settingsBox;
+  late Box<String> _settingsBox;
 
   SettingsRepository() {
     _settingsBox = Hive.box('settings');
@@ -10,11 +10,15 @@ class SettingsRepository {
   static const _callsign = 'callsign';
   static const _locale = 'locale';
 
-  String get callsign => _settingsBox.get(_callsign, defaultValue: '');
-  String get locale => _settingsBox.get(_locale, defaultValue: 'en');
+  String get callsign => _settingsBox.get(_callsign, defaultValue: '') ?? '';
+  String get locale => _settingsBox.get(_locale, defaultValue: 'en') ?? 'en';
 
   void storeData({String? callsign, String? locale}) async {
-    callsign ?? await _settingsBox.put(_callsign, callsign);
-    locale ?? await _settingsBox.put(_locale, locale);
+    if (callsign != null) {
+      await _settingsBox.put(_callsign, callsign);
+    }
+    if (locale != null) {
+      await _settingsBox.put(_locale, locale);
+    }
   }
 }

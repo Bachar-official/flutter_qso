@@ -4,6 +4,7 @@ import 'package:flutter_qso/feature/home/home_state_holder.dart';
 import 'package:flutter_qso/feature/log/log_screen.dart';
 import 'package:flutter_qso/feature/profile/profile_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'home_state.dart';
 
@@ -25,9 +26,9 @@ class HomeScreen extends ConsumerWidget {
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: manager.setPageNumber,
         selectedIndex: state.pageNumber,
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.table_rows), label: 'Log'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
+        destinations: [
+          const NavigationDestination(icon: Icon(Icons.table_rows), label: 'Log'),
+          NavigationDestination(icon: const Icon(Icons.person), label: AppLocalizations.of(context).profile),
         ],
       ),
     );
