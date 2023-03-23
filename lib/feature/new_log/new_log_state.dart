@@ -55,7 +55,7 @@ class NewLogState {
         operator = '',
         band = Band.b80m,
         qth = '',
-        isCurrentDateTime = true,
+        isCurrentDateTime = false,
         qsoDateTime = DateTime.now();
 
   NewLogState copyWith(

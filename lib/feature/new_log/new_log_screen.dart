@@ -3,6 +3,7 @@ import 'package:flutter_qso/app/di.dart';
 import 'package:flutter_qso/data/constants/band.dart';
 import 'package:flutter_qso/data/constants/mode.dart';
 import 'package:flutter_qso/data/constants/validators.dart';
+import 'package:flutter_qso/feature/new_log/components/date_time_picker.dart';
 import 'package:flutter_qso/feature/new_log/components/report_card.dart';
 import 'package:flutter_qso/feature/new_log/new_log_state.dart';
 import 'package:flutter_qso/feature/new_log/new_log_state_holder.dart';
@@ -19,7 +20,6 @@ class NewLogScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(provider);
     final manager = di.newLogManager;
-    manager.setQsoDateTime(DateTime.now());
 
     return WillPopScope(
       onWillPop: () async {
@@ -53,14 +53,24 @@ class NewLogScreen extends ConsumerWidget {
                       onChanged: manager.setCall,
                     ),
                     CheckboxListTile(
-                        value: state.isCurrentDateTime,
-                        onChanged: manager.setIsCurrentDateTime,
+                      value: state.isCurrentDateTime,
+                      onChanged: manager.setIsCurrentDateTime,
                       title: Text(AppLocalizations.of(context).getCurrentDate),
                     ),
-                    !state.isCurrentDateTime ?
-                    InputDatePickerFormField(
-                        firstDate: DateTime.parse('1970-01-01'),
-                        lastDate: DateTime.now())
+                    !state.isCurrentDateTime
+                        ?
+                        // InputDatePickerFormField(
+                        //     firstDate: DateTime.parse('1970-01-01'),
+                        //     lastDate: DateTime.now(),
+                        //   onDateSubmitted: manager.setQsoDateTime,
+                        //   fieldLabelText: AppLocalizations.of(context).qsoDate,
+                        // )
+                        DateTimeField(
+                            onSetDateTime: manager.setQsoDateTime,
+                            dateRangeController: manager.dateController,
+                            hintText: AppLocalizations.of(context).qsoDate,
+                            firstDate: DateTime.parse('1970-01-01'),
+                          )
                         : const SizedBox.shrink(),
                     Autocomplete<Mode>(
                       initialValue: TextEditingValue(
@@ -139,7 +149,12 @@ class NewLogScreen extends ConsumerWidget {
                       onChanged: manager.setComment,
                     ),
                     ElevatedButton(
-                      onPressed: manager.addQSO,
+                      onPressed: () {
+                        bool result = manager.addQSO();
+                        if (result) {
+                          Navigator.pop(context);
+                        }
+                      },
                       child: Text(AppLocalizations.of(context).add),
                     ),
                   ],

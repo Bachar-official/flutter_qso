@@ -10,7 +10,7 @@ class NewLogManager {
   final LogManager logManager;
   final SettingsRepository settingsRepository;
   final formKey = GlobalKey<FormState>();
-
+  final TextEditingController dateController = TextEditingController(text: '');
 
   NewLogManager(
       {required this.holder,
@@ -69,28 +69,33 @@ class NewLogManager {
   void setIsCurrentDateTime(bool? isCurrentDateTime) {
     if (isCurrentDateTime != null) {
       holder.setIsCurrentDateTime(isCurrentDateTime);
-      if(isCurrentDateTime) {
+      if (isCurrentDateTime) {
         setQsoDateTime(DateTime.now());
       }
     }
   }
 
-  void setQsoDateTime(DateTime qsoDateTime) {
-    holder.setQsoDateTime(qsoDateTime);
-    _processDateTime(qsoDateTime.toString());
+  void setQsoDateTime(DateTime? qsoDateTime) {
+    if (qsoDateTime != null) {
+      holder.setQsoDateTime(qsoDateTime);
+      _processDateTime(qsoDateTime.toString());
+    }
   }
 
   void setRstSentR(String r) {
-    if (holder.newLogState.rstSent.isEmpty || holder.newLogState.rstSent.length == 1) {
+    if (holder.newLogState.rstSent.isEmpty ||
+        holder.newLogState.rstSent.length == 1) {
       setRstSent('${r}1');
     }
     setRstSent('$r${holder.newLogState.rstSent[1]}');
   }
 
-  void addQSO() {
+  bool addQSO() {
     if (formKey.currentState!.validate()) {
       logManager.addQSO(holder.newLogState.qso);
+      return true;
     }
+    return false;
   }
 
   void clear() {
@@ -106,5 +111,5 @@ class NewLogManager {
 
   String _processDate(String date) => date.replaceAll('-', '');
 
-  String _processTime(String time) => time.replaceAll(':', '').substring(0,6);
+  String _processTime(String time) => time.replaceAll(':', '').substring(0, 6);
 }
