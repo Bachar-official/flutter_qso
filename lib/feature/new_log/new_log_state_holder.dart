@@ -55,4 +55,8 @@ class NewLogStateHolder extends StateNotifier<NewLogState> {
   void setIsCurrentDateTime(bool isCurrentDateTime) {
     state = state.copyWith(isCurrentDateTime: isCurrentDateTime);
   }
+
+  void setQsoDateTime(DateTime qsoDateTime) {
+    state = state.copyWith(qsoDateTime: qsoDateTime);
+  }
 }

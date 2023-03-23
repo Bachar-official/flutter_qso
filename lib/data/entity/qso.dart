@@ -55,12 +55,12 @@ class QSO extends HiveObject {
         '<call:${call.length}>$call'
         '<qso_date:${qsoDate.length}>$qsoDate'
         '<time_on:${timeOn.length}>$timeOn'
-        '<mode:${mode.name.length}>${mode.name}'
+        '<mode:${mode.name.length}>${mode.toString()}'
         '${rstSent.isNotEmpty ? '<rst_sent:${rstSent.length}>$rstSent' : ''}'
         '${rstRcvd.isNotEmpty ? '<rst_rcvd:${rstRcvd.length}>$rstRcvd' : ''}'
-        '<band:${band.name.length}>${band.name}'
+        '<band:${band.name.length}>${band.toString()}'
         '${qth.isNotEmpty ? '<qth:${qth.length}>$qth' : ''}'
-        '${comment.isNotEmpty ? '<comment:${comment.length}>$comment}' : ''}'
+        '${comment.isNotEmpty ? '<comment:${comment.length}>$comment' : ''}'
         '<eor>\n';
   }
 }

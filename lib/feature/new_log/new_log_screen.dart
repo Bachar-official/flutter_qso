@@ -19,6 +19,7 @@ class NewLogScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(provider);
     final manager = di.newLogManager;
+    manager.setQsoDateTime(DateTime.now());
 
     return WillPopScope(
       onWillPop: () async {
@@ -56,6 +57,11 @@ class NewLogScreen extends ConsumerWidget {
                         onChanged: manager.setIsCurrentDateTime,
                       title: Text(AppLocalizations.of(context).getCurrentDate),
                     ),
+                    !state.isCurrentDateTime ?
+                    InputDatePickerFormField(
+                        firstDate: DateTime.parse('1970-01-01'),
+                        lastDate: DateTime.now())
+                        : const SizedBox.shrink(),
                     Autocomplete<Mode>(
                       initialValue: TextEditingValue(
                           text: state.mode.toString().toUpperCase()),

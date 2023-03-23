@@ -10,8 +10,7 @@ class NewLogManager {
   final LogManager logManager;
   final SettingsRepository settingsRepository;
   final formKey = GlobalKey<FormState>();
-  final TextEditingController dateController = TextEditingController(text: '');
-  final TextEditingController timeController = TextEditingController(text: '');
+
 
   NewLogManager(
       {required this.holder,
@@ -20,6 +19,7 @@ class NewLogManager {
 
   void init() {
     holder.setOperator(settingsRepository.callsign);
+    setQsoDateTime(DateTime.now());
   }
 
   void setOperator(String operator) {
@@ -32,12 +32,10 @@ class NewLogManager {
 
   void setQsoDate(String qsoDate) {
     holder.setQsoDate(qsoDate);
-    dateController.value = TextEditingValue(text: qsoDate);
   }
 
   void setTimeOn(String timeOn) {
     holder.setTimeOn(timeOn);
-    timeController.value = TextEditingValue(text: timeOn);
   }
 
   void setMode(Mode? mode) {
@@ -71,11 +69,15 @@ class NewLogManager {
   void setIsCurrentDateTime(bool? isCurrentDateTime) {
     if (isCurrentDateTime != null) {
       holder.setIsCurrentDateTime(isCurrentDateTime);
+      if(isCurrentDateTime) {
+        setQsoDateTime(DateTime.now());
+      }
     }
   }
 
-  void convertDateTime(DateTime? dateTime) {
-    print(dateTime);
+  void setQsoDateTime(DateTime qsoDateTime) {
+    holder.setQsoDateTime(qsoDateTime);
+    _processDateTime(qsoDateTime.toString());
   }
 
   void setRstSentR(String r) {
