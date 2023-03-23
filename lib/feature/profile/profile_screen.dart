@@ -28,6 +28,12 @@ class ProfileScreen extends ConsumerWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+              TextField(
+                controller: manager.controller,
+                onChanged: manager.setCallsign,
+                decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context).operator),
+              ),
               DropdownButtonFormField<String>(
                 decoration: InputDecoration(
                     labelText: AppLocalizations.of(context).language),
@@ -61,5 +67,8 @@ class ProfileScreen extends ConsumerWidget {
 }
 
 List<DropdownMenuItem<String>> _themeList(Iterable<String> options) {
-  return options.map((option) => DropdownMenuItem<String>(value: option, child: Text(option))).toList();
+  return options
+      .map((option) =>
+          DropdownMenuItem<String>(value: option, child: Text(option)))
+      .toList();
 }

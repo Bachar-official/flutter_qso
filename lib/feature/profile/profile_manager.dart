@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_qso/data/repository/settings_repository.dart';
 import 'package:flutter_qso/feature/profile/profile_state_holder.dart';
 
 class ProfileManager {
   final ProfileStateHolder holder;
   final SettingsRepository settingsRepository;
+  final TextEditingController controller = TextEditingController(text: '');
 
   ProfileManager({required this.holder, required this.settingsRepository});
 
@@ -11,6 +13,7 @@ class ProfileManager {
     holder.setCallsign(settingsRepository.callsign);
     holder.setLocale(settingsRepository.locale);
     holder.setTheme(settingsRepository.theme);
+    controller.value = TextEditingValue(text: holder.profileState.callsign);
   }
 
   void setCallsign(String callsign) {

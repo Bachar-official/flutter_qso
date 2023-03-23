@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_qso/app/di.dart';
+import 'package:flutter_qso/app/routing.dart';
 import 'package:flutter_qso/feature/log/log_state.dart';
 import 'package:flutter_qso/feature/log/log_state_holder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,6 +25,12 @@ class LogScreen extends ConsumerWidget {
         child: Text(
           state.log.length.toString(),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.pushNamed(context, AppRouter.newQsoScreen);
+        },
       ),
     );
   }
