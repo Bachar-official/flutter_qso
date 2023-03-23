@@ -58,14 +58,7 @@ class NewLogScreen extends ConsumerWidget {
                       title: Text(AppLocalizations.of(context).getCurrentDate),
                     ),
                     !state.isCurrentDateTime
-                        ?
-                        // InputDatePickerFormField(
-                        //     firstDate: DateTime.parse('1970-01-01'),
-                        //     lastDate: DateTime.now(),
-                        //   onDateSubmitted: manager.setQsoDateTime,
-                        //   fieldLabelText: AppLocalizations.of(context).qsoDate,
-                        // )
-                        DateTimeField(
+                        ? DateTimeField(
                             onSetDateTime: manager.setQsoDateTime,
                             dateRangeController: manager.dateController,
                             hintText: AppLocalizations.of(context).qsoDate,
