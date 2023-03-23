@@ -60,7 +60,6 @@ class NewLogScreen extends ConsumerWidget {
                     !state.isCurrentDateTime
                         ? DateTimeField(
                             onSetDateTime: manager.setQsoDateTime,
-                            dateRangeController: manager.dateController,
                             hintText: AppLocalizations.of(context).qsoDate,
                             firstDate: DateTime.parse('1970-01-01'),
                           )

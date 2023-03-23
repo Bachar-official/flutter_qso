@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 class DateTimeField extends StatefulWidget {
   final DateTime? value;
   final void Function(DateTime?) onSetDateTime;
-  final TextEditingController dateRangeController;
   final String hintText;
   final DateTime firstDate;
 
   const DateTimeField(
       {Key? key,
       required this.onSetDateTime,
-      required this.dateRangeController,
       required this.hintText,
       required this.firstDate,
       this.value})
@@ -23,6 +21,7 @@ class DateTimeField extends StatefulWidget {
 class _DateTimeFieldState extends State<DateTimeField> {
   DateTime dateTime = DateTime.now();
   TimeOfDay timeOfDay = TimeOfDay.fromDateTime(DateTime.now());
+  TextEditingController dateRangeController = TextEditingController(text: '');
 
   void setDate(DateTime? date) {
     if (date != null) {
@@ -39,8 +38,9 @@ class _DateTimeFieldState extends State<DateTimeField> {
   }
 
   void submit() {
-    dateTime = dateTime.copyWith(hour: timeOfDay.hour, minute: timeOfDay.minute);
-    widget.dateRangeController.value = TextEditingValue(text: dateTime.toString());
+    dateTime =
+        dateTime.copyWith(hour: timeOfDay.hour, minute: timeOfDay.minute);
+    dateRangeController.value = TextEditingValue(text: dateTime.toString());
     setState(() {});
     widget.onSetDateTime(dateTime);
   }
@@ -57,22 +57,22 @@ class _DateTimeFieldState extends State<DateTimeField> {
               hintText: widget.hintText,
               contentPadding: const EdgeInsets.symmetric(vertical: 5),
             ),
-            controller: widget.dateRangeController,
-            onTap: () => showDatePicker(
-              context: context,
-              initialEntryMode: DatePickerEntryMode.inputOnly,
-              lastDate: DateTime.now(),
-              firstDate: widget.firstDate,
-              initialDate: DateTime.now(),
-            ).then((value) {
-              setDate(value);
-              showTimePicker(context: context,
-                  initialEntryMode: TimePickerEntryMode.input,
-                  initialTime: const TimeOfDay(hour: 0, minute: 0)).then((time) {
-                  setTime(time);
-              });
+            controller: dateRangeController,
+            onTap: () async {
+              DateTime? date = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: widget.firstDate,
+                lastDate: DateTime.now(),
+              );
+              TimeOfDay? time = await showTimePicker(
+                context: context,
+                initialTime: TimeOfDay(hour: 0, minute: 0),
+              );
+              setDate(date);
+              setTime(time);
               submit();
-            }),
+            },
           ),
         ),
       ],

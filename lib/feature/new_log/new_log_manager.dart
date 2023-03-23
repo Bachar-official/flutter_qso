@@ -1,24 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_qso/data/constants/band.dart';
 import 'package:flutter_qso/data/constants/mode.dart';
-import 'package:flutter_qso/data/repository/settings_repository.dart';
 import 'package:flutter_qso/feature/log/log_manager.dart';
 import 'package:flutter_qso/feature/new_log/new_log_state_holder.dart';
+
+import '../profile/profile_manager.dart';
 
 class NewLogManager {
   final NewLogStateHolder holder;
   final LogManager logManager;
-  final SettingsRepository settingsRepository;
+  final ProfileManager profileManager;
   final formKey = GlobalKey<FormState>();
   final TextEditingController dateController = TextEditingController(text: '');
 
   NewLogManager(
       {required this.holder,
       required this.logManager,
-      required this.settingsRepository});
+      required this.profileManager});
 
   void init() {
-    holder.setOperator(settingsRepository.callsign);
+    holder.setOperator(profileManager.holder.profileState.callsign);
     setQsoDateTime(DateTime.now());
   }
 

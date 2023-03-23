@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_qso/app/di.dart';
 import 'package:flutter_qso/app/routing.dart';
-import 'package:flutter_qso/feature/log/components/table_header.dart';
+import 'package:flutter_qso/feature/log/components/log_card.dart';
 import 'package:flutter_qso/feature/log/log_state.dart';
 import 'package:flutter_qso/feature/log/log_state_holder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,8 +22,9 @@ class LogScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).log),
       ),
-      body: SingleChildScrollView(),
-      // TODO: Make a ListView for QSOs
+      body: ListView(
+        children: state.log.map((log) => LogCard(qso: log)).toList(),
+      ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {

@@ -55,7 +55,7 @@ class ProfileScreen extends ConsumerWidget {
               DropdownButtonFormField<String>(
                   decoration: InputDecoration(
                       labelText: AppLocalizations.of(context).theme),
-                  value: 'Light',
+                  value: state.theme,
                   items: _themeList(themes.keys),
                   onChanged: manager.setTheme),
             ],

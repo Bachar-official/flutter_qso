@@ -1,91 +1,184 @@
+import 'package:hive_flutter/hive_flutter.dart';
+
+part 'mode.g.dart';
+
+@HiveType(typeId: 1)
 enum Mode {
+  @HiveField(0)
   am,
+  @HiveField(1)
   ardop,
+  @HiveField(2)
   atv,
+  @HiveField(3)
   chip,
+  @HiveField(4)
   clo,
+  @HiveField(5)
   contesti,
+  @HiveField(6)
   cw,
+  @HiveField(7)
   digitalVoice,
+  @HiveField(8)
   domino,
+  @HiveField(9)
   dynamic,
+  @HiveField(10)
   fax,
+  @HiveField(11)
   fm,
+  @HiveField(12)
   fsk441,
+  @HiveField(13)
   ft8,
+  @HiveField(14)
   hell,
+  @HiveField(15)
   iscat,
+  @HiveField(16)
   jt4,
+  @HiveField(17)
   jt6m,
+  @HiveField(18)
   jt9,
+  @HiveField(19)
   jt44,
+  @HiveField(20)
   jt65,
+  @HiveField(21)
   mfsk,
+  @HiveField(22)
   msk144,
+  @HiveField(23)
   mt63,
+  @HiveField(24)
   olivia,
+  @HiveField(25)
   opera,
+  @HiveField(26)
   pac,
+  @HiveField(27)
   pax,
+  @HiveField(28)
   pkt,
+  @HiveField(29)
   psk,
+  @HiveField(30)
   psk2k,
+  @HiveField(31)
   q15,
+  @HiveField(32)
   qra64,
+  @HiveField(33)
   ros,
+  @HiveField(34)
   rtty,
+  @HiveField(35)
   rttyM,
+  @HiveField(36)
   ssb,
+  @HiveField(37)
   sstv,
+  @HiveField(38)
   t10,
+  @HiveField(39)
   thor,
+  @HiveField(40)
   thrb,
+  @HiveField(41)
   tor,
+  @HiveField(42)
   v4,
+  @HiveField(43)
   voi,
+  @HiveField(44)
   winmor,
+  @HiveField(45)
   wspr,
+  @HiveField(46)
   amtorfec,
+  @HiveField(47)
   asci,
+  @HiveField(48)
   c4fm,
+  @HiveField(49)
   chip64,
+  @HiveField(50)
   chip128,
+  @HiveField(51)
   dominoF,
+  @HiveField(52)
   dstar,
+  @HiveField(53)
   fmhell,
+  @HiveField(54)
   fsk31,
+  @HiveField(55)
   gtor,
+  @HiveField(56)
   hell80,
+  @HiveField(57)
   hfsk,
+  @HiveField(58)
   jt4a,
+  @HiveField(59)
   jt4b,
+  @HiveField(60)
   jt4c,
+  @HiveField(61)
   jt4d,
+  @HiveField(62)
   jt4e,
+  @HiveField(63)
   jt4f,
+  @HiveField(64)
   jt4g,
+  @HiveField(65)
   jt65a,
+  @HiveField(66)
   jt65b,
+  @HiveField(67)
   jt65c,
+  @HiveField(68)
   mfsk8,
+  @HiveField(69)
   mfsk16,
+  @HiveField(70)
   pac2,
+  @HiveField(71)
   pac3,
+  @HiveField(72)
   pax2,
+  @HiveField(73)
   pcw,
+  @HiveField(74)
   psk10,
+  @HiveField(75)
   psk31,
+  @HiveField(76)
   psk63,
+  @HiveField(77)
   psk63f,
+  @HiveField(78)
   psk125,
+  @HiveField(79)
   pskam10,
+  @HiveField(80)
   pskam31,
+  @HiveField(81)
   pskam50,
+  @HiveField(82)
   pskfec31,
+  @HiveField(83)
   pskhell,
+  @HiveField(84)
   qpsk31,
+  @HiveField(85)
   qpsk63,
+  @HiveField(86)
   qpsk125,
+  @HiveField(87)
   thrbx;
 
   @override

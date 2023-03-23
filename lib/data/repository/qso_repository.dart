@@ -2,17 +2,21 @@ import 'package:flutter_qso/data/entity/qso.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class QSORepository {
-  late Box<List<QSO>> _qsoBox;
+  late Box<QSO> _qsoBox;
 
   QSORepository() {
-    _qsoBox = Hive.box('qso');
+    _qsoBox = Hive.box('log');
   }
 
   static const _qso = 'qso';
 
-  List<QSO> get qso => _qsoBox.get(_qso, defaultValue: []) ?? [];
+  List<QSO> get qso => _qsoBox.values.toList();
+
+  Map<int, QSO> _convertQso(List<QSO> qso) {
+    return qso.asMap();
+  }
 
   void storeData(List<QSO> qso) async {
-    await _qsoBox.put(_qso, qso);
+    await _qsoBox.putAll(_convertQso(qso));
   }
 }

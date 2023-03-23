@@ -43,7 +43,7 @@ class DI {
     newLogManager = NewLogManager(
         holder: newLogStateHolder,
         logManager: logManager,
-        settingsRepository: settingsRepository);
+        profileManager: profileManager);
   }
 
   void init() {
