@@ -6,6 +6,8 @@ import 'package:flutter_qso/feature/profile/profile_state.dart';
 import 'package:flutter_qso/feature/profile/profile_state_holder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../data/constants/themes.dart';
+
 final profileProvider = StateNotifierProvider<ProfileStateHolder, ProfileState>((ref) => di.profileStateHolder);
 
 class App extends ConsumerWidget {
@@ -20,6 +22,7 @@ class App extends ConsumerWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       onGenerateRoute: AppRouter.generateRoute,
       locale: Locale(state.locale),
+      theme: themes[state.theme],
     );
   }
 }

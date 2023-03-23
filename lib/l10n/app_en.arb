@@ -1,3 +1,8 @@
 {
-  "profile": "Profile"
+  "profile": "Profile",
+  "log": "Log",
+  "language": "Language",
+  "dark": "Dark",
+  "light": "Light",
+  "theme": "Theme"
 }

@@ -27,7 +27,7 @@ class HomeScreen extends ConsumerWidget {
         onDestinationSelected: manager.setPageNumber,
         selectedIndex: state.pageNumber,
         destinations: [
-          const NavigationDestination(icon: Icon(Icons.table_rows), label: 'Log'),
+          NavigationDestination(icon: const Icon(Icons.table_rows), label: AppLocalizations.of(context).log),
           NavigationDestination(icon: const Icon(Icons.person), label: AppLocalizations.of(context).profile),
         ],
       ),

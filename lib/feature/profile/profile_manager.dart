@@ -10,6 +10,7 @@ class ProfileManager {
   void init() {
     holder.setCallsign(settingsRepository.callsign);
     holder.setLocale(settingsRepository.locale);
+    holder.setTheme(settingsRepository.theme);
   }
 
   void setCallsign(String callsign) {
@@ -22,5 +23,9 @@ class ProfileManager {
       holder.setLocale(locale);
       settingsRepository.storeData(locale: locale);
     }
+  }
+
+  void setTheme(String? theme) {
+    holder.setTheme(theme);
   }
 }

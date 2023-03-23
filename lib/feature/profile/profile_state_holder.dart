@@ -13,4 +13,8 @@ class ProfileStateHolder extends StateNotifier<ProfileState> {
   void setLocale(String locale) {
     state = state.copyWith(locale: locale);
   }
+
+  void setTheme(String? theme) {
+    state = state.copyWith(theme: theme);
+  }
 }
