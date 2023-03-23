@@ -26,6 +26,9 @@ class ProfileManager {
   }
 
   void setTheme(String? theme) {
-    holder.setTheme(theme);
+    if (theme != null) {
+      holder.setTheme(theme);
+      settingsRepository.storeData(theme: theme);
+    }
   }
 }

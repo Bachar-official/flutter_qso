@@ -23,7 +23,7 @@ class SettingsRepository {
       await _settingsBox.put(_locale, locale);
     }
     if (theme != null) {
-      await _settingsBox.put(_theme, _theme);
+      await _settingsBox.put(_theme, theme);
     }
   }
 }

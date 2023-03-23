@@ -49,15 +49,8 @@ class ProfileScreen extends ConsumerWidget {
               DropdownButtonFormField<String>(
                   decoration: InputDecoration(
                       labelText: AppLocalizations.of(context).theme),
-                  value: state.theme,
-                  items: themes.keys
-                      .map(
-                        (key) => DropdownMenuItem<String>(
-                          value: key,
-                          child: Text(key),
-                        ),
-                      )
-                      .toList(),
+                  value: 'Light',
+                  items: _themeList(themes.keys),
                   onChanged: manager.setTheme),
             ],
           ),
@@ -65,4 +58,8 @@ class ProfileScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+List<DropdownMenuItem<String>> _themeList(Iterable<String> options) {
+  return options.map((option) => DropdownMenuItem<String>(value: option, child: Text(option))).toList();
 }
