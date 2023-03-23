@@ -21,6 +21,9 @@ class LogScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).log),
+        actions: [
+          IconButton(onPressed: manager.clearList, icon: const Icon(Icons.folder_delete_outlined),),
+        ],
       ),
       body: ListView(
         children: state.log.map((log) => LogCard(qso: log)).toList(),

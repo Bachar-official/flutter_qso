@@ -144,6 +144,7 @@ class NewLogScreen extends ConsumerWidget {
                       onPressed: () {
                         bool result = manager.addQSO();
                         if (result) {
+                          manager.clear();
                           Navigator.pop(context);
                         }
                       },

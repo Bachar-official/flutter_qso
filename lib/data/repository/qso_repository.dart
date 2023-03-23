@@ -8,8 +8,6 @@ class QSORepository {
     _qsoBox = Hive.box('log');
   }
 
-  static const _qso = 'qso';
-
   List<QSO> get qso => _qsoBox.values.toList();
 
   Map<int, QSO> _convertQso(List<QSO> qso) {
@@ -18,5 +16,9 @@ class QSORepository {
 
   void storeData(List<QSO> qso) async {
     await _qsoBox.putAll(_convertQso(qso));
+  }
+
+  Future<void> clearData() async {
+    await _qsoBox.clear();
   }
 }

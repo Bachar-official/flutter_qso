@@ -22,4 +22,9 @@ class LogManager {
     List<QSO> newLog = [...holder.logState.log, qso];
     setQSO(newLog);
   }
+
+  void clearList() async {
+    await qsoRepository.clearData();
+    setQSO([]);
+  }
 }

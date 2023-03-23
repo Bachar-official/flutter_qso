@@ -23,5 +23,6 @@
   "strengthReq": "Second digit from 1 to 9",
   "readabilityReq": "First digit from 1 to 5",
   "onlyDigit": "Field can only contain a two-digit number",
-  "getCurrentDate": "Get current date and time"
+  "getCurrentDate": "Get current date and time",
+  "unknown": "Unknown"
 }
