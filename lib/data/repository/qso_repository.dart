@@ -10,9 +10,7 @@ class QSORepository {
 
   List<QSO> get qso => _qsoBox.values.toList();
 
-  Map<int, QSO> _convertQso(List<QSO> qso) {
-    return qso.asMap();
-  }
+  Map<int, QSO> _convertQso(List<QSO> qso) => qso.asMap();
 
   void storeData(List<QSO> qso) async {
     await _qsoBox.putAll(_convertQso(qso));

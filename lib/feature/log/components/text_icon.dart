@@ -13,7 +13,9 @@ class TextIcon extends StatelessWidget {
     return Row(
       children: [
         icon,
-        Text(text.isEmpty ? AppLocalizations.of(context).unknown : text),
+        Text(
+          text.isEmpty ? AppLocalizations.of(context).unknown : text,
+        ),
       ],
     );
   }

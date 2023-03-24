@@ -31,7 +31,7 @@ class LogCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Report(isSent: true, report: qso.rstSent),
-                Text(qso.call),
+                Text(qso.call, style: const TextStyle(fontSize: 20),),
                 Report(isSent: false, report: qso.rstRcvd),
               ],
             ),
