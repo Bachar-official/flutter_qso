@@ -48,6 +48,10 @@ class NewLogStateHolder extends StateNotifier<NewLogState> {
     state = state.copyWith(comment: comment);
   }
 
+  void setName(String name) {
+    state = state.copyWith(name: name);
+  }
+
   void clearState() {
     state = NewLogState.initial();
   }

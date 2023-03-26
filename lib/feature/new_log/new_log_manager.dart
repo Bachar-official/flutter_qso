@@ -67,6 +67,10 @@ class NewLogManager {
     holder.setComment(comment);
   }
 
+  void setName(String name) {
+    holder.setName(name);
+  }
+
   void setIsCurrentDateTime(bool? isCurrentDateTime) {
     if (isCurrentDateTime != null) {
       holder.setIsCurrentDateTime(isCurrentDateTime);
@@ -81,14 +85,6 @@ class NewLogManager {
       holder.setQsoDateTime(qsoDateTime);
       _processDateTime(qsoDateTime.toString());
     }
-  }
-
-  void setRstSentR(String r) {
-    if (holder.newLogState.rstSent.isEmpty ||
-        holder.newLogState.rstSent.length == 1) {
-      setRstSent('${r}1');
-    }
-    setRstSent('$r${holder.newLogState.rstSent[1]}');
   }
 
   bool addQSO() {

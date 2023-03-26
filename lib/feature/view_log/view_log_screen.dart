@@ -5,7 +5,8 @@ import 'package:flutter_qso/feature/view_log/view_log_state.dart';
 import 'package:flutter_qso/feature/view_log/view_log_state_holder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final provider = StateNotifierProvider<ViewLogStateHolder, ViewLogState>((ref) => di.viewLogStateHolder);
+final provider = StateNotifierProvider<ViewLogStateHolder, ViewLogState>(
+    (ref) => di.viewLogStateHolder);
 
 class ViewLogScreen extends ConsumerWidget {
   const ViewLogScreen({Key? key}) : super(key: key);
@@ -17,12 +18,9 @@ class ViewLogScreen extends ConsumerWidget {
     final manager = di.viewLogManager;
 
     return Scaffold(
-      onEndDrawerChanged: (isLoaded) {
-        if (isLoaded) {
-          manager.setQSO(qso);
-        }
-      },
-      appBar: AppBar(title: Text(state.qso?.call ?? 'No'),),
+      appBar: AppBar(
+        title: Text(state.qso?.call ?? 'No'),
+      ),
     );
   }
 }

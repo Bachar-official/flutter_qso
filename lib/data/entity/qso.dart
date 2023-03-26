@@ -37,6 +37,9 @@ class QSO extends HiveObject {
   @HiveField(9)
   String comment;
 
+  @HiveField(10)
+  String name;
+
   QSO({
     required this.operator,
     required this.call,
@@ -48,6 +51,7 @@ class QSO extends HiveObject {
     required this.band,
     required this.qth,
     required this.comment,
+    required this.name,
   });
 
   String toADIFString() {
@@ -61,6 +65,7 @@ class QSO extends HiveObject {
         '<band:${band.name.length}>${band.toString()}'
         '${qth.isNotEmpty ? '<qth:${qth.length}>$qth' : ''}'
         '${comment.isNotEmpty ? '<comment:${comment.length}>$comment' : ''}'
+        '${name.isNotEmpty ? '<name:${name.length}>$name' : ''}'
         '<eor>\n';
   }
 }

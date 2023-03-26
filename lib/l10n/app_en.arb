@@ -24,5 +24,7 @@
   "readabilityReq": "First digit from 1 to 5",
   "onlyDigit": "Field can only contain a two-digit number",
   "getCurrentDate": "Get current date and time",
-  "unknown": "Unknown"
+  "unknown": "Unknown",
+  "name": "Subscriber's name",
+  "cancel": "Cancel"
 }

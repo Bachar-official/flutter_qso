@@ -52,6 +52,12 @@ class NewLogScreen extends ConsumerWidget {
                       initialValue: state.call,
                       onChanged: manager.setCall,
                     ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context).name),
+                      initialValue: state.name,
+                      onChanged: manager.setName,
+                    ),
                     CheckboxListTile(
                       value: state.isCurrentDateTime,
                       onChanged: manager.setIsCurrentDateTime,
@@ -140,15 +146,27 @@ class NewLogScreen extends ConsumerWidget {
                       initialValue: state.comment,
                       onChanged: manager.setComment,
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        bool result = manager.addQSO();
-                        if (result) {
-                          manager.clear();
-                          Navigator.pop(context);
-                        }
-                      },
-                      child: Text(AppLocalizations.of(context).add),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            bool result = manager.addQSO();
+                            if (result) {
+                              manager.clear();
+                              Navigator.pop(context);
+                            }
+                          },
+                          child: Text(AppLocalizations.of(context).add),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            manager.clear();
+                            Navigator.pop(context);
+                          },
+                          child: Text(AppLocalizations.of(context).cancel),
+                        ),
+                      ],
                     ),
                   ],
                 ),

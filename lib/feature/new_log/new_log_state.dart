@@ -17,6 +17,7 @@ class NewLogState {
   final String comment;
   final bool isCurrentDateTime;
   final DateTime qsoDateTime;
+  final String name;
 
   QSO get qso => QSO(
       operator: operator,
@@ -28,7 +29,8 @@ class NewLogState {
       rstRcvd: rstRcvd,
       band: band,
       qth: qth,
-      comment: comment);
+      comment: comment,
+      name: qso.name);
 
   const NewLogState(
       {required this.comment,
@@ -42,7 +44,8 @@ class NewLogState {
       required this.band,
       required this.call,
       required this.isCurrentDateTime,
-      required this.qsoDateTime});
+      required this.qsoDateTime,
+      required this.name});
 
   NewLogState.initial()
       : comment = '',
@@ -56,21 +59,24 @@ class NewLogState {
         band = Band.b80m,
         qth = '',
         isCurrentDateTime = false,
+        name = '',
         qsoDateTime = DateTime.now();
 
-  NewLogState copyWith(
-          {String? comment,
-          String? call,
-          String? qsoDate,
-          String? rstSent,
-          String? rstRcvd,
-          String? timeOn,
-          Mode? mode,
-          String? operator,
-          Band? band,
-          String? qth,
-          bool? isCurrentDateTime,
-          DateTime? qsoDateTime}) =>
+  NewLogState copyWith({
+    String? comment,
+    String? call,
+    String? qsoDate,
+    String? rstSent,
+    String? rstRcvd,
+    String? timeOn,
+    Mode? mode,
+    String? operator,
+    Band? band,
+    String? qth,
+    bool? isCurrentDateTime,
+    DateTime? qsoDateTime,
+    String? name,
+  }) =>
       NewLogState(
           call: call ?? this.call,
           comment: comment ?? this.comment,
@@ -83,5 +89,6 @@ class NewLogState {
           band: band ?? this.band,
           qth: qth ?? this.qth,
           isCurrentDateTime: isCurrentDateTime ?? this.isCurrentDateTime,
-          qsoDateTime: qsoDateTime ?? this.qsoDateTime);
+          qsoDateTime: qsoDateTime ?? this.qsoDateTime,
+          name: name ?? this.name);
 }

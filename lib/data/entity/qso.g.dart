@@ -27,13 +27,14 @@ class QSOAdapter extends TypeAdapter<QSO> {
       band: fields[7] as Band,
       qth: fields[8] as String,
       comment: fields[9] as String,
+      name: fields[10] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, QSO obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.operator)
       ..writeByte(1)
@@ -53,7 +54,9 @@ class QSOAdapter extends TypeAdapter<QSO> {
       ..writeByte(8)
       ..write(obj.qth)
       ..writeByte(9)
-      ..write(obj.comment);
+      ..write(obj.comment)
+      ..writeByte(10)
+      ..write(obj.name);
   }
 
   @override
