@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_qso/data/repository/settings_repository.dart';
+import 'package:flutter_qso/feature/new_log/new_log_manager.dart';
 import 'package:flutter_qso/feature/profile/profile_state_holder.dart';
 
 class ProfileManager {
   final ProfileStateHolder holder;
   final SettingsRepository settingsRepository;
+  final NewLogManager newLogManager;
   final TextEditingController controller = TextEditingController(text: '');
 
-  ProfileManager({required this.holder, required this.settingsRepository});
+  ProfileManager({required this.holder, required this.settingsRepository, required this.newLogManager});
 
   void init() {
     holder.setCallsign(settingsRepository.callsign);
@@ -19,6 +21,7 @@ class ProfileManager {
   void setCallsign(String callsign) {
     holder.setCallsign(callsign);
     settingsRepository.storeData(callsign: callsign);
+    newLogManager.setOperator(callsign);
   }
 
   void setLocale(String? locale) {

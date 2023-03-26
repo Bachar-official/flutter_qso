@@ -35,19 +35,21 @@ class DI {
     homeStateHolder = HomeStateHolder();
     homeManager = HomeManager(holder: homeStateHolder);
 
-    profileStateHolder = ProfileStateHolder();
-    profileManager = ProfileManager(
-        holder: profileStateHolder, settingsRepository: settingsRepository);
-
     logStateHolder = LogStateHolder();
     logManager =
         LogManager(holder: logStateHolder, qsoRepository: qsoRepository);
 
     newLogStateHolder = NewLogStateHolder();
     newLogManager = NewLogManager(
-        holder: newLogStateHolder,
-        logManager: logManager,
-        profileManager: profileManager);
+      holder: newLogStateHolder,
+      logManager: logManager,
+    );
+
+    profileStateHolder = ProfileStateHolder();
+    profileManager = ProfileManager(
+        holder: profileStateHolder,
+        settingsRepository: settingsRepository,
+        newLogManager: newLogManager);
 
     viewLogStateHolder = ViewLogStateHolder();
     viewLogManager =

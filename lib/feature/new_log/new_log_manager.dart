@@ -4,22 +4,17 @@ import 'package:flutter_qso/data/constants/mode.dart';
 import 'package:flutter_qso/feature/log/log_manager.dart';
 import 'package:flutter_qso/feature/new_log/new_log_state_holder.dart';
 
-import '../profile/profile_manager.dart';
-
 class NewLogManager {
   final NewLogStateHolder holder;
   final LogManager logManager;
-  final ProfileManager profileManager;
   final formKey = GlobalKey<FormState>();
   final TextEditingController dateController = TextEditingController(text: '');
 
   NewLogManager(
       {required this.holder,
-      required this.logManager,
-      required this.profileManager});
+      required this.logManager});
 
   void init() {
-    holder.setOperator(profileManager.holder.profileState.callsign);
     setQsoDateTime(DateTime.now());
   }
 
