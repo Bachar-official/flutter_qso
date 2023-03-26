@@ -19,6 +19,9 @@ class ProfileManager {
     holder.setTheme(settingsRepository.theme);
     holder.setMode(settingsRepository.mode);
     holder.setBand(settingsRepository.band);
+    newLogManager.setOperator(settingsRepository.callsign);
+    newLogManager.setBand(settingsRepository.band);
+    newLogManager.setMode(settingsRepository.mode);
     controller.value = TextEditingValue(text: holder.profileState.callsign);
   }
 
@@ -46,6 +49,7 @@ class ProfileManager {
     if (mode != null) {
       holder.setMode(mode);
       settingsRepository.storeData(mode: mode);
+      newLogManager.setMode(mode);
     }
   }
 
@@ -53,6 +57,7 @@ class ProfileManager {
     if (band != null) {
       holder.setBand(band);
       settingsRepository.storeData(band: band);
+      newLogManager.setBand(band);
     }
   }
 }
