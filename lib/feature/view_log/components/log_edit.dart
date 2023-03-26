@@ -21,6 +21,10 @@ class LogEdit extends StatelessWidget {
               decoration: InputDecoration(labelText: AppLocalizations.of(context).name),
               initialValue: qso.name,
               onChanged: manager.setName,
+            ),
+            TextFormField(
+              decoration: InputDecoration(labelText: AppLocalizations.of(context).rstSent),
+              initialValue: qso.rstSent,
             )
           ],
         ),

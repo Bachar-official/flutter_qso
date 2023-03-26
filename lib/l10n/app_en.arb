@@ -26,5 +26,7 @@
   "getCurrentDate": "Get current date and time",
   "unknown": "Unknown",
   "name": "Subscriber's name",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "default_mode": "Default mode",
+  "default_band": "Default band"
 }

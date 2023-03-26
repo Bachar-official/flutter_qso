@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_qso/data/constants/band.dart';
+import 'package:flutter_qso/data/constants/mode.dart';
 import 'package:flutter_qso/data/repository/settings_repository.dart';
 import 'package:flutter_qso/feature/new_log/new_log_manager.dart';
 import 'package:flutter_qso/feature/profile/profile_state_holder.dart';
@@ -15,6 +17,8 @@ class ProfileManager {
     holder.setCallsign(settingsRepository.callsign);
     holder.setLocale(settingsRepository.locale);
     holder.setTheme(settingsRepository.theme);
+    holder.setMode(settingsRepository.mode);
+    holder.setBand(settingsRepository.band);
     controller.value = TextEditingValue(text: holder.profileState.callsign);
   }
 
@@ -35,6 +39,20 @@ class ProfileManager {
     if (theme != null) {
       holder.setTheme(theme);
       settingsRepository.storeData(theme: theme);
+    }
+  }
+
+  void setMode(Mode? mode) {
+    if (mode != null) {
+      holder.setMode(mode);
+      settingsRepository.storeData(mode: mode);
+    }
+  }
+
+  void setBand(Band? band) {
+    if (band != null) {
+      holder.setBand(band);
+      settingsRepository.storeData(band: band);
     }
   }
 }
