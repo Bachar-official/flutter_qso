@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_qso/app/di.dart';
 import 'package:flutter_qso/data/constants/band.dart';
 import 'package:flutter_qso/data/constants/mode.dart';
-import 'package:flutter_qso/data/constants/validators.dart';
+import 'package:flutter_qso/data/utils/validators.dart';
 import 'package:flutter_qso/feature/new_log/components/date_time_picker.dart';
 import 'package:flutter_qso/feature/new_log/components/report_card.dart';
 import 'package:flutter_qso/feature/new_log/new_log_state.dart';

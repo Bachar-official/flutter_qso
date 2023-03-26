@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_qso/app/routing.dart';
 import 'package:flutter_qso/data/entity/qso.dart';
+import 'package:flutter_qso/data/utils/format_qso.dart';
 import 'package:flutter_qso/feature/log/components/report.dart';
 
 import 'text_icon.dart';
@@ -25,10 +26,10 @@ class LogCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    _formatQSODate(qso.qsoDate),
+                    formatQSODate(qso.qsoDate),
                   ),
                   Text(
-                    _formatQSOTime(qso.timeOn),
+                    formatQSOTime(qso.timeOn),
                   ),
                 ],
               ),
@@ -57,9 +58,3 @@ class LogCard extends StatelessWidget {
     );
   }
 }
-
-String _formatQSODate(String date) =>
-    '${date.substring(0, 4)}-${date.substring(4, 6)}-${date.substring(6, 8)}';
-
-String _formatQSOTime(String time) =>
-    '${time.substring(0, 2)}:${time.substring(2, 4)}:${time.substring(4, 6)}';

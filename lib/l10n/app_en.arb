@@ -10,7 +10,7 @@
   "add": "Add",
   "operator": "Your callsign",
   "call": "Subscriber's callsign",
-  "qsoDate": "Date and time of QSO (UTC)",
+  "qsoDate": "Date and time of QSO",
   "mode": "Modulation",
   "rstSent": "Sent report",
   "rstRcvd": "Received report",

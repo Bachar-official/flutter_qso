@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_qso/app/di.dart';
 import 'package:flutter_qso/data/entity/qso.dart';
+import 'package:flutter_qso/feature/view_log/components/log_edit.dart';
+import 'package:flutter_qso/feature/view_log/components/log_show.dart';
 import 'package:flutter_qso/feature/view_log/view_log_state.dart';
 import 'package:flutter_qso/feature/view_log/view_log_state_holder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,11 +19,31 @@ class ViewLogScreen extends ConsumerWidget {
     final state = ref.watch(provider);
     final manager = di.viewLogManager;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(state.qso?.call ?? 'No'),
+    return WillPopScope(
+      onWillPop: () async {
+        manager.clear();
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            state.qso == null
+                ? IconButton(
+                    onPressed: () => manager.setQSO(qso),
+                    icon: const Icon(Icons.edit),
+                  )
+                : Container(),
+          ],
+          title: Text(state.qso?.call ?? qso.call),
+        ),
+        body: state.qso != null
+            ? LogEdit(
+                qso: state.qso!,
+                formKey: manager.formKey,
+                manager: manager,
+              )
+            : LogShow(qso: qso),
       ),
-      body: state.qso != null ? const SizedBox.shrink() : Text('AAA')
     );
   }
 }
