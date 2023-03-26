@@ -30,7 +30,7 @@ class NewLogState {
       band: band,
       qth: qth,
       comment: comment,
-      name: qso.name);
+      name: name);
 
   const NewLogState(
       {required this.comment,

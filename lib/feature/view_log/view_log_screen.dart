@@ -21,6 +21,7 @@ class ViewLogScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(state.qso?.call ?? 'No'),
       ),
+      body: state.qso != null ? const SizedBox.shrink() : Text('AAA')
     );
   }
 }
