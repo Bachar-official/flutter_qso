@@ -7,7 +7,15 @@ class LogEdit extends StatelessWidget {
   final QSO qso;
   final Key formKey;
   final ViewLogManager manager;
-  const LogEdit({Key? key, required this.qso, required this.formKey, required this.manager}) : super(key: key);
+  final Function() onSubmit;
+
+  const LogEdit(
+      {Key? key,
+      required this.qso,
+      required this.formKey,
+      required this.manager,
+      required this.onSubmit})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +26,39 @@ class LogEdit extends StatelessWidget {
         child: Column(
           children: [
             TextFormField(
-              decoration: InputDecoration(labelText: AppLocalizations.of(context).name),
+              decoration:
+                  InputDecoration(labelText: AppLocalizations.of(context).name),
               initialValue: qso.name,
               onChanged: manager.setName,
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: AppLocalizations.of(context).rstSent),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).rstSent),
               initialValue: qso.rstSent,
-            )
+              onChanged: manager.setRstSent,
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).rstRcvd),
+              initialValue: qso.rstRcvd,
+              onChanged: manager.setRstRcvd,
+            ),
+            TextFormField(
+              decoration:
+                  InputDecoration(labelText: AppLocalizations.of(context).qth),
+              initialValue: qso.qth,
+              onChanged: manager.setQth,
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).comment),
+              initialValue: qso.comment,
+              onChanged: manager.setComment,
+            ),
+            ElevatedButton(
+              onPressed: onSubmit,
+              child: Text(AppLocalizations.of(context).save),
+            ),
           ],
         ),
       ),

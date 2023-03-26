@@ -11,15 +11,10 @@ class ViewLogStateHolder extends StateNotifier<ViewLogState> {
     state = state.copyWith(qso: qso);
   }
 
-  void setEditableQSO(QSO qso) {
-    state = state.copyWith(editableQso: qso);
-  }
-
   void clear() {
     state = state.copyWith(
-        qso: null,
-        isNullableQSO: true,
-        editableQso: null,
-        isNullableEditableQso: true);
+      qso: null,
+      isNullableQSO: true,
+    );
   }
 }

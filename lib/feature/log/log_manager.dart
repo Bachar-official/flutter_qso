@@ -23,6 +23,22 @@ class LogManager {
     setQSO(newLog);
   }
 
+  void replaceQSO(QSO qso) {
+    List<QSO> newLog = holder.logState.log;
+    int index = newLog.indexWhere((element) =>
+        element.qsoDate == qso.qsoDate && element.timeOn == qso.timeOn);
+    newLog[index] = qso;
+    setQSO(newLog);
+  }
+
+  void removeQSO(QSO qso) {
+    List<QSO> newLog = holder.logState.log;
+    int index = newLog.indexWhere((element) =>
+    element.qsoDate == qso.qsoDate && element.timeOn == qso.timeOn);
+    newLog.removeAt(index);
+    setQSO(newLog);
+  }
+
   void clearList() async {
     await qsoRepository.clearData();
     setQSO([]);

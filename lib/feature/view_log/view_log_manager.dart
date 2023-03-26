@@ -14,42 +14,38 @@ class ViewLogManager {
     holder.setQSO(qso);
   }
 
-  void setEditableQSO(QSO qso) {
-    holder.setEditableQSO(qso);
-  }
-
   void setName(String name) {
     QSO qso = holder.logState.qso!;
     qso.name = name;
-    setEditableQSO(qso);
+    setQSO(qso);
   }
 
   void setRstSent(String rstSent) {
     QSO qso = holder.logState.qso!;
     qso.rstSent = rstSent;
-    setEditableQSO(qso);
+    setQSO(qso);
   }
 
   void setRstRcvd(String rstRcvd) {
     QSO qso = holder.logState.qso!;
     qso.rstRcvd = rstRcvd;
-    setEditableQSO(qso);
+    setQSO(qso);
   }
 
   void setQth(String qth) {
     QSO qso = holder.logState.qso!;
     qso.qth = qth;
-    setEditableQSO(qso);
+    setQSO(qso);
   }
 
   void setComment(String comment) {
     QSO qso = holder.logState.qso!;
     qso.comment = comment;
-    setEditableQSO(qso);
+    setQSO(qso);
   }
 
   void submit() {
-    holder.setQSO(holder.logState.editableQso!);
+    logManager.replaceQSO(holder.logState.qso!);
   }
 
   void clear() => holder.clear();

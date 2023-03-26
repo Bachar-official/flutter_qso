@@ -27,20 +27,23 @@ class ViewLogScreen extends ConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           actions: [
-            state.editableQso == null
+            state.qso == null
                 ? IconButton(
-                    onPressed: () => manager.setEditableQSO(qso),
+                    onPressed: () => manager.setQSO(qso),
                     icon: const Icon(Icons.edit),
                   )
                 : Container(),
           ],
-          title: Text(state.editableQso?.call ?? qso.call),
+          title: Text(state.qso?.call ?? qso.call),
         ),
-        body: state.editableQso != null
-            ? LogEdit(
-                qso: state.editableQso!,
-                formKey: manager.formKey,
-                manager: manager,
+        body: state.qso != null
+            ? SingleChildScrollView(
+                child: LogEdit(
+                  qso: state.qso!,
+                  formKey: manager.formKey,
+                  manager: manager,
+                  onSubmit: manager.submit,
+                ),
               )
             : LogShow(qso: qso),
       ),
