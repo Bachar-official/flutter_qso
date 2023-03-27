@@ -55,17 +55,17 @@ class QSO extends HiveObject {
   });
 
   String toADIFString() {
-    return '<operator:${operator.length}>$operator'
-        '<call:${call.length}>$call'
-        '<qso_date:${qsoDate.length}>$qsoDate'
-        '<time_on:${timeOn.length}>$timeOn'
-        '<mode:${mode.name.length}>${mode.toString()}'
-        '${rstSent.isNotEmpty ? '<rst_sent:${rstSent.length}>$rstSent' : ''}'
-        '${rstRcvd.isNotEmpty ? '<rst_rcvd:${rstRcvd.length}>$rstRcvd' : ''}'
-        '<band:${band.name.length}>${band.toString()}'
-        '${qth.isNotEmpty ? '<qth:${qth.length}>$qth' : ''}'
-        '${comment.isNotEmpty ? '<comment:${comment.length}>$comment' : ''}'
-        '${name.isNotEmpty ? '<name:${name.length}>$name' : ''}'
+    return '<operator:${operator.length}>$operator\n'
+        '<call:${call.length}>$call\n'
+        '<qso_date:${qsoDate.length}>$qsoDate\n'
+        '<time_on:${timeOn.length}>$timeOn\n'
+        '<mode:${mode.name.length}>${mode.toString()}\n'
+        '${rstSent.isNotEmpty ? '<rst_sent:${rstSent.length}>$rstSent\n' : ''}'
+        '${rstRcvd.isNotEmpty ? '<rst_rcvd:${rstRcvd.length}>$rstRcvd\n' : ''}'
+        '<band:${band.name.length}>${band.toString()}\n'
+        '${qth.isNotEmpty ? '<qth:${qth.length}>$qth\n' : ''}'
+        '${comment.isNotEmpty ? '<comment:${comment.length}>$comment\n' : ''}'
+        '${name.isNotEmpty ? '<name:${name.length}>$name\n' : ''}'
         '<eor>\n';
   }
 }

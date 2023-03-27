@@ -33,6 +33,10 @@ class LogScreen extends ConsumerWidget {
                     ),
             icon: const Icon(Icons.folder_delete_outlined),
           ),
+          IconButton(
+            onPressed: state.log.isEmpty ? null : manager.share,
+            icon: const Icon(Icons.share),
+          ),
         ],
       ),
       body: ListView(

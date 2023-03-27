@@ -1,4 +1,5 @@
 import 'package:flutter_qso/feature/log/log_state_holder.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../data/entity/qso.dart';
 import '../../data/repository/qso_repository.dart';
@@ -42,5 +43,20 @@ class LogManager {
   void clearList() async {
     await qsoRepository.clearData();
     setQSO([]);
+  }
+
+  void share() {
+    String adiFileContent = '<adif_ver:5>3.0.5\n'
+        '<eoh>\n'
+        '${_collectLog()}';
+    Share.share(adiFileContent);
+  }
+
+  String _collectLog() {
+    String content = '';
+    for (var log in holder.logState.log) {
+      content += log.toADIFString();
+    }
+    return content;
   }
 }
