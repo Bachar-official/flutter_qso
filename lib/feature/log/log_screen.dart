@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_qso/app/di.dart';
 import 'package:flutter_qso/app/routing.dart';
 import 'package:flutter_qso/feature/log/components/log_card.dart';
+import 'package:flutter_qso/feature/log/components/log_delete_dialog.dart';
 import 'package:flutter_qso/feature/log/log_state.dart';
 import 'package:flutter_qso/feature/log/log_state_holder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,7 +23,16 @@ class LogScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).log),
         actions: [
-          IconButton(onPressed: manager.clearList, icon: const Icon(Icons.folder_delete_outlined),),
+          IconButton(
+            onPressed: state.log.isEmpty
+                ? null
+                : () => showDialog(
+                      context: context,
+                      builder: (context) =>
+                          LogDeleteDialog(onClear: manager.clearList),
+                    ),
+            icon: const Icon(Icons.folder_delete_outlined),
+          ),
         ],
       ),
       body: ListView(

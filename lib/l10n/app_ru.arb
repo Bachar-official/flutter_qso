@@ -29,5 +29,9 @@
   "cancel": "Отмена",
   "save": "Сохранить",
   "default_mode": "Модуляция по умолчанию",
-  "default_band": "Диапазон по умолчанию"
+  "default_band": "Диапазон по умолчанию",
+  "delete_qso_confirmation": "Вы уверены, что хотите удалить это QSO?",
+  "yes": "Да",
+  "no": "Нет",
+  "clear_qso_confirmation": "Это действие удалит все QSO. Вы уверены?"
 }

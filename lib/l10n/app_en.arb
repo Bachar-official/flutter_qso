@@ -29,5 +29,9 @@
   "cancel": "Cancel",
   "save": "Save",
   "default_mode": "Default mode",
-  "default_band": "Default band"
+  "default_band": "Default band",
+  "delete_qso_confirmation": "Are you sure you want to delete this QSO?",
+  "yes": "Yes",
+  "no": "No",
+  "clear_qso_confirmation": "This action will clear all QSOs. Are you sure?"
 }
