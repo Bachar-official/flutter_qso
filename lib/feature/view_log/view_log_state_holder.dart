@@ -11,6 +11,26 @@ class ViewLogStateHolder extends StateNotifier<ViewLogState> {
     state = state.copyWith(qso: qso);
   }
 
+  void setName(String name) {
+    state = state.copyWith(name: name);
+  }
+
+  void setRstSent(String rstSent) {
+    state = state.copyWith(rstSent: rstSent);
+  }
+
+  void setRstRcvd(String rstRcvd) {
+    state = state.copyWith(rstRcvd: rstRcvd);
+  }
+
+  void setQth(String qth) {
+    state = state.copyWith(qth: qth);
+  }
+
+  void setComment(String comment) {
+    state = state.copyWith(comment: comment);
+  }
+
   void clear() {
     state = state.copyWith(
       qso: null,
