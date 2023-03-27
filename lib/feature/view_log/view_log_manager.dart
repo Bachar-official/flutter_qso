@@ -59,4 +59,8 @@ class ViewLogManager {
   }
 
   void clear() => holder.clear();
+
+  void deleteQso(QSO qso) {
+    logManager.removeQSO(qso);
+  }
 }

@@ -13,6 +13,7 @@ class QSORepository {
   Map<int, QSO> _convertQso(List<QSO> qso) => qso.asMap();
 
   void storeData(List<QSO> qso) async {
+    await _qsoBox.clear();
     await _qsoBox.putAll(_convertQso(qso));
   }
 

@@ -33,6 +33,13 @@ class ViewLogScreen extends ConsumerWidget {
                     icon: const Icon(Icons.edit),
                   )
                 : Container(),
+            IconButton(
+              onPressed: () {
+                manager.deleteQso(qso);
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.delete),
+            ),
           ],
           title: Text(state.qso?.call ?? qso.call),
         ),
@@ -42,7 +49,10 @@ class ViewLogScreen extends ConsumerWidget {
                   qso: state.qso!,
                   formKey: manager.formKey,
                   manager: manager,
-                  onSubmit: manager.submit,
+                  onSubmit: () {
+                    manager.submit();
+                    Navigator.pop(context);
+                  },
                 ),
               )
             : LogShow(qso: qso),
