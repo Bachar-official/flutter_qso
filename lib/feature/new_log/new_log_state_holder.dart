@@ -53,7 +53,11 @@ class NewLogStateHolder extends StateNotifier<NewLogState> {
   }
 
   void clearState() {
-    state = NewLogState.initial();
+    String operator = state.operator;
+    Band band = state.band;
+    Mode mode = state.mode;
+    state = NewLogState.initial()
+        .copyWith(operator: operator, mode: mode, band: band);
   }
 
   void setIsCurrentDateTime(bool isCurrentDateTime) {

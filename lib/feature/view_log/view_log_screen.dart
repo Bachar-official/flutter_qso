@@ -3,6 +3,7 @@ import 'package:flutter_qso/app/di.dart';
 import 'package:flutter_qso/data/entity/qso.dart';
 import 'package:flutter_qso/feature/view_log/components/log_edit.dart';
 import 'package:flutter_qso/feature/view_log/components/log_show.dart';
+import 'package:flutter_qso/feature/view_log/components/view_log_detele_dialog.dart';
 import 'package:flutter_qso/feature/view_log/view_log_state.dart';
 import 'package:flutter_qso/feature/view_log/view_log_state_holder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,10 +35,11 @@ class ViewLogScreen extends ConsumerWidget {
                   )
                 : Container(),
             IconButton(
-              onPressed: () {
-                manager.deleteQso(qso);
-                Navigator.pop(context);
-              },
+              onPressed: () => showDialog(
+                context: context,
+                builder: (context) => ViewLogDeleteDialog(
+                    qso: qso, onDeleteQSO: manager.deleteQso),
+              ),
               icon: const Icon(Icons.delete),
             ),
           ],
