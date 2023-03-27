@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flutter_qso">
    <application
-        android:label="flutter_qso"
+        android:label="QSO Logger"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
