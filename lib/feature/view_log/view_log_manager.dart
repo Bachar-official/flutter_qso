@@ -36,12 +36,24 @@ class ViewLogManager {
 
   void submit() {
     QSO qso = holder.logState.qso!;
-    qso
-    ..name = holder.logState.name
-    ..rstSent = holder.logState.rstSent
-    ..rstRcvd = holder.logState.rstRcvd
-    ..qth = holder.logState.qth
-    ..comment = holder.logState.comment;
+    if (holder.logState.name.isNotEmpty) {
+      qso.name = holder.logState.name;
+    }
+    if (holder.logState.comment.isNotEmpty) {
+      qso.comment = holder.logState.comment;
+    }
+    if (holder.logState.rstSent.isNotEmpty) {
+      qso.rstSent = holder.logState.rstSent;
+    }
+    if (holder.logState.rstRcvd.isNotEmpty) {
+      qso.rstRcvd = holder.logState.rstRcvd;
+    }
+    if (holder.logState.qth.isNotEmpty) {
+      qso.qth = holder.logState.qth;
+    }
+    if (holder.logState.comment.isNotEmpty) {
+      qso.comment = holder.logState.comment;
+    }
     setQSO(qso);
     logManager.replaceQSO(holder.logState.qso!);
   }
