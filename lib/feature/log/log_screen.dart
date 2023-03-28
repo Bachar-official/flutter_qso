@@ -18,6 +18,7 @@ class LogScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(logProvider);
     final manager = di.logManager;
+    var brightness = Theme.of(context).brightness;
 
     return Scaffold(
       appBar: AppBar(
@@ -35,12 +36,31 @@ class LogScreen extends ConsumerWidget {
           ),
           IconButton(
             onPressed: state.log.isEmpty ? null : manager.share,
-            icon: const Icon(Icons.share),
+            icon: Badge(
+              alignment: const AlignmentDirectional(5, 21),
+              label: const Text(
+                'ADIF',
+                style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold),
+              ),
+              backgroundColor: Colors.transparent,
+              textColor: _getTextColor(state.log, brightness),
+              child: const Icon(Icons.file_copy_outlined),
+            ),
           ),
         ],
       ),
-      body: ListView(
-        children: state.log.map((log) => LogCard(qso: log)).toList(),
+      body: Stack(
+        children: [
+          ListView(
+            children: state.log.map((log) => LogCard(qso: log)).toList(),
+          ),
+          Center(
+            child: Text(
+              state.log.isEmpty ? AppLocalizations.of(context).no_qsos : '',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
@@ -50,4 +70,14 @@ class LogScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+Color _getTextColor(List<dynamic> list, Brightness brightness) {
+  if (list.isNotEmpty) {
+    return Colors.white70;
+  }
+  if (brightness == Brightness.dark) {
+    return Colors.grey;
+  }
+  return Colors.indigo;
 }
