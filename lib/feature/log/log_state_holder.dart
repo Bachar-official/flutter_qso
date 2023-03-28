@@ -11,4 +11,12 @@ class LogStateHolder extends StateNotifier<LogState> {
   void setLog(List<QSO> log) {
     state = state.copyWith(log: log);
   }
+
+  void setQuery(String query) {
+    state = state.copyWith(query: query);
+  }
+
+  void clearQuery() {
+    state = state.copyWith(query: '');
+  }
 }

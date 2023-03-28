@@ -22,10 +22,31 @@ class LogScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 70,
+        bottom: PreferredSize(
+          preferredSize: const Size(double.infinity, 60),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(5, 10, 5, 15),
+            child: SizedBox(
+              height: 30,
+              child: TextFormField(
+                controller: manager.queryController,
+                decoration: InputDecoration(
+                  hintText: AppLocalizations.of(context).query,
+                  suffix: IconButton(
+                    icon: const Icon(Icons.clear),
+                    onPressed: manager.clearQuery,
+                  ),
+                ),
+                onChanged: manager.setQuery,
+              ),
+            ),
+          ),
+        ),
         title: Text(AppLocalizations.of(context).log),
         actions: [
           IconButton(
-            onPressed: state.log.isEmpty
+            onPressed: state.actualLog.isEmpty
                 ? null
                 : () => showDialog(
                       context: context,
@@ -35,7 +56,7 @@ class LogScreen extends ConsumerWidget {
             icon: const Icon(Icons.folder_delete_outlined),
           ),
           IconButton(
-            onPressed: state.log.isEmpty ? null : manager.share,
+            onPressed: state.actualLog.isEmpty ? null : manager.share,
             icon: Badge(
               alignment: const AlignmentDirectional(5, 21),
               label: const Text(
@@ -43,7 +64,7 @@ class LogScreen extends ConsumerWidget {
                 style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold),
               ),
               backgroundColor: Colors.transparent,
-              textColor: _getTextColor(state.log, brightness),
+              textColor: _getTextColor(state.actualLog, brightness),
               child: const Icon(Icons.file_copy_outlined),
             ),
           ),
@@ -52,11 +73,13 @@ class LogScreen extends ConsumerWidget {
       body: Stack(
         children: [
           ListView(
-            children: state.log.map((log) => LogCard(qso: log)).toList(),
+            children: state.actualLog.map((log) => LogCard(qso: log)).toList(),
           ),
           Center(
             child: Text(
-              state.log.isEmpty ? AppLocalizations.of(context).no_qsos : '',
+              state.actualLog.isEmpty
+                  ? AppLocalizations.of(context).no_qsos
+                  : '',
               textAlign: TextAlign.center,
             ),
           ),

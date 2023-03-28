@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_qso/feature/log/log_state_holder.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -7,6 +8,7 @@ import '../../data/repository/qso_repository.dart';
 class LogManager {
   final LogStateHolder holder;
   final QSORepository qsoRepository;
+  final TextEditingController queryController = TextEditingController(text: '');
 
   LogManager({required this.holder, required this.qsoRepository});
 
@@ -22,6 +24,13 @@ class LogManager {
   void addQSO(QSO qso) {
     List<QSO> newLog = [...holder.logState.log, qso];
     setQSO(newLog);
+  }
+
+  void setQuery(String query) => holder.setQuery(query);
+
+  void clearQuery() {
+    queryController.value = const TextEditingValue(text: '');
+    holder.clearQuery();
   }
 
   void replaceQSO(QSO qso) {
