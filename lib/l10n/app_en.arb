@@ -35,5 +35,8 @@
   "no": "No",
   "clear_qso_confirmation": "This action will clear all QSOs. Are you sure?",
   "no_qsos": "No log entries found. Click \"+\" to create a new one.",
-  "query": "Search query"
+  "query": "Search query",
+  "delete_all": "Delete all QSOs",
+  "export": "Export QSOs",
+  "saveAs": "Save QSO as..."
 }

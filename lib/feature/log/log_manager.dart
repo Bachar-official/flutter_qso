@@ -1,4 +1,6 @@
+import 'package:filepicker_windows/filepicker_windows.dart';
 import 'package:flutter/material.dart';
+import 'dart:io' show Platform, File;
 import 'package:flutter_qso/feature/log/log_state_holder.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -44,7 +46,7 @@ class LogManager {
   void removeQSO(QSO qso) {
     List<QSO> newLog = holder.logState.log;
     int index = newLog.indexWhere((element) =>
-    element.qsoDate == qso.qsoDate && element.timeOn == qso.timeOn);
+        element.qsoDate == qso.qsoDate && element.timeOn == qso.timeOn);
     newLog.removeAt(index);
     setQSO(newLog);
   }
@@ -58,7 +60,18 @@ class LogManager {
     String adiFileContent = '<adif_ver:5>3.0.5\n'
         '<eoh>\n'
         '${_collectLog()}';
-    Share.share(adiFileContent);
+    if (Platform.isWindows) {
+      final file = SaveFilePicker()
+          ..filterSpecification = {}
+          ..defaultFilterIndex = 0
+          ..defaultExtension = 'adif';
+      File? saved = file.getFile();
+      if (saved != null) {
+        saved.writeAsStringSync(adiFileContent);
+      }
+    } else {
+      Share.share(adiFileContent);
+    }
   }
 
   String _collectLog() {

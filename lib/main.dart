@@ -17,6 +17,7 @@ void main() async {
   await Hive.openBox<String>('settings');
   await Hive.openBox<QSO>('log');
   di.init();
+
   runApp(
     const ProviderScope(
       child: App(),

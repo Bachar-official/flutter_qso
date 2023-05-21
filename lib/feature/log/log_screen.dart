@@ -18,7 +18,6 @@ class LogScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(logProvider);
     final manager = di.logManager;
-    var brightness = Theme.of(context).brightness;
 
     return Scaffold(
       appBar: AppBar(
@@ -46,6 +45,7 @@ class LogScreen extends ConsumerWidget {
         title: Text(AppLocalizations.of(context).log),
         actions: [
           IconButton(
+            tooltip: AppLocalizations.of(context).delete_all,
             onPressed: state.actualLog.isEmpty
                 ? null
                 : () => showDialog(
@@ -56,17 +56,9 @@ class LogScreen extends ConsumerWidget {
             icon: const Icon(Icons.folder_delete_outlined),
           ),
           IconButton(
+            tooltip: AppLocalizations.of(context).export,
             onPressed: state.actualLog.isEmpty ? null : manager.share,
-            icon: Badge(
-              alignment: const AlignmentDirectional(5, 21),
-              label: const Text(
-                'ADIF',
-                style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold),
-              ),
-              backgroundColor: Colors.transparent,
-              textColor: _getTextColor(state.actualLog, brightness),
-              child: const Icon(Icons.file_copy_outlined),
-            ),
+            icon: const Icon(Icons.file_copy_outlined),
           ),
         ],
       ),
@@ -93,14 +85,4 @@ class LogScreen extends ConsumerWidget {
       ),
     );
   }
-}
-
-Color _getTextColor(List<dynamic> list, Brightness brightness) {
-  if (list.isNotEmpty) {
-    return Colors.white70;
-  }
-  if (brightness == Brightness.dark) {
-    return Colors.grey;
-  }
-  return Colors.indigo;
 }

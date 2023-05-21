@@ -17,6 +17,7 @@ class App extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(profileProvider);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'QSO Logger',
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
