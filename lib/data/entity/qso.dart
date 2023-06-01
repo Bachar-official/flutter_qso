@@ -68,4 +68,33 @@ class QSO extends HiveObject {
         '${name.isNotEmpty ? '<name:${name.length}>$name\n' : ''}'
         '<eor>\n';
   }
+
+  QSO.fromJson(Map<String, dynamic> json)
+      : operator = json['operator'],
+        call = json['call'],
+        mode = Mode.values.firstWhere((e) => json['mode'] == e.name),
+        rstSent = json['rstSent'],
+        rstRcvd = json['rstRcvd'],
+        band = Band.values.firstWhere((e) => json['band'] == e.name),
+        qth = json['qth'],
+        comment = json['comment'],
+        name = json['name'],
+        qsoDate = json['qsoDate'],
+        timeOn = json['timeOn'];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'operator': operator,
+      'call': call,
+      'mode': mode.name,
+      'rstSent': rstSent,
+      'rstRcvd': rstRcvd,
+      'band': band.name,
+      'qth': qth,
+      'comment': comment,
+      'name': name,
+      'qsoDate': qsoDate,
+      'timeOn': timeOn,
+    };
+  }
 }
