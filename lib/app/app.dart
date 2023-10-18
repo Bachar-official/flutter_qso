@@ -8,7 +8,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/constants/themes.dart';
 
-final profileProvider = StateNotifierProvider<ProfileStateHolder, ProfileState>((ref) => di.profileStateHolder);
+final profileProvider = StateNotifierProvider<ProfileStateHolder, ProfileState>(
+    (ref) => di.profileStateHolder);
 
 class App extends ConsumerWidget {
   const App({Key? key}) : super(key: key);
@@ -24,6 +25,7 @@ class App extends ConsumerWidget {
       onGenerateRoute: AppRouter.generateRoute,
       locale: Locale(state.locale),
       theme: themes[state.theme],
+      navigatorKey: di.navKey,
     );
   }
 }

@@ -54,6 +54,22 @@ class QSO extends HiveObject {
     required this.name,
   });
 
+  factory QSO.fromMap(Map<String, dynamic> map) {
+    return QSO(
+      operator: map['OPERATOR'] ?? 'undefined',
+      call: map['CALL'] ?? 'undefined',
+      qsoDate: map['QSO_DATE'] ?? '19700101',
+      timeOn: map['TIME_ON'] ?? '000000',
+      mode: Mode.fromString(map['MODE']),
+      rstSent: map['RST_SENT'] ?? '',
+      rstRcvd: map['RST_RCVD'] ?? '',
+      band: Band.fromString(map['BAND']),
+      qth: map['QTH'] ?? '',
+      comment: map['COMMENT'] ?? '',
+      name: map['NAME'] ?? '',
+    );
+  }
+
   String toADIFString() {
     return '<operator:${operator.length}>$operator\n'
         '<call:${call.length}>$call\n'

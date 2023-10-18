@@ -21,6 +21,8 @@ class NewLogScreen extends ConsumerWidget {
     final state = ref.watch(provider);
     final manager = di.newLogManager;
 
+    final localization = AppLocalizations.of(context);
+
     return WillPopScope(
       onWillPop: () async {
         manager.clear();
@@ -39,34 +41,36 @@ class NewLogScreen extends ConsumerWidget {
                 child: Column(
                   children: <Widget>[
                     TextFormField(
-                      decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context).operator),
-                      validator: (value) => validateEmpty(value, context),
+                      decoration:
+                          InputDecoration(labelText: localization.operator),
+                      validator: (value) =>
+                          validateCallsign(value, localization),
                       initialValue: state.operator,
                       onChanged: manager.setOperator,
                     ),
                     TextFormField(
-                      decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context).call),
-                      validator: (value) => validateEmpty(value, context),
+                      decoration: InputDecoration(labelText: localization.call),
+                      validator: (value) =>
+                          validateCallsign(value, localization),
                       initialValue: state.call,
                       onChanged: manager.setCall,
                     ),
                     TextFormField(
-                      decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context).name),
+                      decoration: InputDecoration(labelText: localization.name),
                       initialValue: state.name,
                       onChanged: manager.setName,
                     ),
                     CheckboxListTile(
                       value: state.isCurrentDateTime,
                       onChanged: manager.setIsCurrentDateTime,
-                      title: Text(AppLocalizations.of(context).getCurrentDate),
+                      title: Text(localization.getCurrentDate),
                     ),
                     !state.isCurrentDateTime
                         ? DateTimeField(
                             onSetDateTime: manager.setQsoDateTime,
-                            hintText: AppLocalizations.of(context).qsoDate,
+                            validator: (value) =>
+                                validateEmpty(value, localization),
+                            hintText: localization.qsoDate,
                             firstDate: DateTime.parse('1970-01-01'),
                           )
                         : const SizedBox.shrink(),
@@ -109,8 +113,8 @@ class NewLogScreen extends ConsumerWidget {
                               FocusNode fieldFocusNode,
                               VoidCallback onFieldSubmitted) =>
                           TextFormField(
-                        decoration: InputDecoration(
-                            labelText: AppLocalizations.of(context).band),
+                        decoration:
+                            InputDecoration(labelText: localization.band),
                         controller: fieldTextEditingController,
                         focusNode: fieldFocusNode,
                       ),
@@ -118,31 +122,32 @@ class NewLogScreen extends ConsumerWidget {
                     ),
                     ReportCard(
                         field: TextFormField(
-                          decoration: InputDecoration(
-                              labelText: AppLocalizations.of(context).r_s),
-                          validator: (value) => validateRS(value, context),
+                          keyboardType: TextInputType.number,
+                          decoration:
+                              InputDecoration(labelText: localization.r_s),
+                          validator: (value) => validateRS(value, localization),
                           initialValue: state.rstSent,
                           onChanged: manager.setRstSent,
                         ),
                         title: AppLocalizations.of(context).rstSent),
                     ReportCard(
                         field: TextFormField(
-                          decoration: InputDecoration(
-                              labelText: AppLocalizations.of(context).r_s),
-                          validator: (value) => validateRS(value, context),
+                          keyboardType: TextInputType.number,
+                          decoration:
+                              InputDecoration(labelText: localization.r_s),
+                          validator: (value) => validateRS(value, localization),
                           initialValue: state.rstRcvd,
                           onChanged: manager.setRstRcvd,
                         ),
-                        title: AppLocalizations.of(context).rstRcvd),
+                        title: localization.rstRcvd),
                     TextFormField(
-                      decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context).qth),
+                      decoration: InputDecoration(labelText: localization.qth),
                       initialValue: state.qth,
                       onChanged: manager.setQth,
                     ),
                     TextFormField(
-                      decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context).comment),
+                      decoration:
+                          InputDecoration(labelText: localization.comment),
                       initialValue: state.comment,
                       onChanged: manager.setComment,
                     ),
@@ -150,21 +155,12 @@ class NewLogScreen extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton(
-                          onPressed: () {
-                            bool result = manager.addQSO();
-                            if (result) {
-                              manager.clear();
-                              Navigator.pop(context);
-                            }
-                          },
-                          child: Text(AppLocalizations.of(context).add),
+                          onPressed: manager.addQSO,
+                          child: Text(localization.add),
                         ),
                         ElevatedButton(
-                          onPressed: () {
-                            manager.clear();
-                            Navigator.pop(context);
-                          },
-                          child: Text(AppLocalizations.of(context).cancel),
+                          onPressed: manager.cancel,
+                          child: Text(localization.cancel),
                         ),
                       ],
                     ),

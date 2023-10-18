@@ -11,7 +11,8 @@ import 'app/di.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  Hive..registerAdapter(BandAdapter())
+  Hive
+    ..registerAdapter(BandAdapter())
     ..registerAdapter(ModeAdapter())
     ..registerAdapter(QSOAdapter());
   await Hive.openBox<String>('settings');

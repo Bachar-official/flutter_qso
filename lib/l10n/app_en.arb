@@ -19,10 +19,12 @@
   "comment": "Comment",
   "strength": "Strength",
   "readability": "Readability",
-  "r_s": "Readability and Strength",
+  "tone": "Tone",
+  "r_s": "Readability, Strength and/or Tone",
   "strengthReq": "Second digit from 1 to 9",
   "readabilityReq": "First digit from 1 to 5",
-  "onlyDigit": "Field can only contain a two-digit number",
+  "toneReq": "Third digit from 1 to 9",
+  "onlyDigit": "Field can only contain a two- or three-digit number",
   "getCurrentDate": "Get current date and time",
   "unknown": "Unknown",
   "name": "Subscriber's name",
@@ -38,5 +40,8 @@
   "query": "Search query",
   "delete_all": "Delete all QSOs",
   "export": "Export QSOs",
-  "saveAs": "Save QSO as..."
+  "saveAs": "Save QSO as...",
+  "minCallsignLength": "Minimum field length is 3 symbols",
+  "maxCallsignLength": "Maximum field length is 15 symbols",
+  "wrongFormat": "Wrong format"
 }

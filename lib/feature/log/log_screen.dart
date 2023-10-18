@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_qso/app/di.dart';
-import 'package:flutter_qso/app/routing.dart';
 import 'package:flutter_qso/feature/log/components/log_card.dart';
 import 'package:flutter_qso/feature/log/components/log_delete_dialog.dart';
 import 'package:flutter_qso/feature/log/log_state.dart';
@@ -16,6 +15,7 @@ class LogScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final localization = AppLocalizations.of(context);
     final state = ref.watch(logProvider);
     final manager = di.logManager;
 
@@ -31,7 +31,7 @@ class LogScreen extends ConsumerWidget {
               child: TextFormField(
                 controller: manager.queryController,
                 decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context).query,
+                  hintText: localization.query,
                   suffix: IconButton(
                     icon: const Icon(Icons.clear),
                     onPressed: manager.clearQuery,
@@ -42,10 +42,10 @@ class LogScreen extends ConsumerWidget {
             ),
           ),
         ),
-        title: Text(AppLocalizations.of(context).log),
+        title: Text(localization.log),
         actions: [
           IconButton(
-            tooltip: AppLocalizations.of(context).delete_all,
+            tooltip: localization.delete_all,
             onPressed: state.actualLog.isEmpty
                 ? null
                 : () => showDialog(
@@ -56,9 +56,13 @@ class LogScreen extends ConsumerWidget {
             icon: const Icon(Icons.folder_delete_outlined),
           ),
           IconButton(
-            tooltip: AppLocalizations.of(context).export,
+            tooltip: localization.export,
             onPressed: state.actualLog.isEmpty ? null : manager.share,
             icon: const Icon(Icons.file_copy_outlined),
+          ),
+          IconButton(
+            onPressed: manager.import,
+            icon: const Icon(Icons.inbox),
           ),
         ],
       ),
@@ -69,19 +73,15 @@ class LogScreen extends ConsumerWidget {
           ),
           Center(
             child: Text(
-              state.actualLog.isEmpty
-                  ? AppLocalizations.of(context).no_qsos
-                  : '',
+              state.actualLog.isEmpty ? localization.no_qsos : '',
               textAlign: TextAlign.center,
             ),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        onPressed: manager.goToNewLogPage,
         child: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.pushNamed(context, AppRouter.newQsoScreen);
-        },
       ),
     );
   }

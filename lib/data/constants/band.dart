@@ -73,4 +73,8 @@ enum Band {
 
   @override
   String toString() => name.substring(1).replaceAll('_', '.');
+
+  static Band fromString(String str) => Band.values.firstWhere(
+      (element) => str.toLowerCase() == element.toString(),
+      orElse: () => Band.b2m);
 }

@@ -28,19 +28,24 @@ class DI {
   late final ViewLogStateHolder viewLogStateHolder;
   late final ViewLogManager viewLogManager;
 
+  late final GlobalKey<NavigatorState> navKey;
+
   DI() {
     settingsRepository = SettingsRepository();
     qsoRepository = QSORepository();
+
+    navKey = GlobalKey<NavigatorState>();
 
     homeStateHolder = HomeStateHolder();
     homeManager = HomeManager(holder: homeStateHolder);
 
     logStateHolder = LogStateHolder();
-    logManager =
-        LogManager(holder: logStateHolder, qsoRepository: qsoRepository);
+    logManager = LogManager(
+        holder: logStateHolder, qsoRepository: qsoRepository, navKey: navKey);
 
     newLogStateHolder = NewLogStateHolder();
     newLogManager = NewLogManager(
+      navKey: navKey,
       holder: newLogStateHolder,
       logManager: logManager,
     );
