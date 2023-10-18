@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_qso/app/di.dart';
-import 'package:flutter_qso/app/routing.dart';
 import 'package:flutter_qso/feature/log/components/log_card.dart';
 import 'package:flutter_qso/feature/log/components/log_delete_dialog.dart';
 import 'package:flutter_qso/feature/log/log_state.dart';
@@ -78,10 +77,8 @@ class LogScreen extends ConsumerWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        onPressed: manager.goToNewLogPage,
         child: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.pushNamed(context, AppRouter.newQsoScreen);
-        },
       ),
     );
   }

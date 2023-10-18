@@ -7,12 +7,12 @@ import 'package:flutter_qso/feature/new_log/new_log_state_holder.dart';
 class NewLogManager {
   final NewLogStateHolder holder;
   final LogManager logManager;
+  final GlobalKey<NavigatorState> navKey;
   final formKey = GlobalKey<FormState>();
   final TextEditingController dateController = TextEditingController(text: '');
 
   NewLogManager(
-      {required this.holder,
-      required this.logManager});
+      {required this.holder, required this.logManager, required this.navKey});
 
   void init() {
     setQsoDateTime(DateTime.now());
@@ -82,12 +82,17 @@ class NewLogManager {
     }
   }
 
-  bool addQSO() {
+  void addQSO() {
     if (formKey.currentState!.validate()) {
       logManager.addQSO(holder.newLogState.qso);
-      return true;
+      clear();
+      Navigator.pop(navKey.currentState!.context);
     }
-    return false;
+  }
+
+  void cancel() {
+    clear();
+    Navigator.pop(navKey.currentState!.context);
   }
 
   void clear() {

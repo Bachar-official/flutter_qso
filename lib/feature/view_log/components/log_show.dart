@@ -11,50 +11,51 @@ class LogShow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            '${AppLocalizations.of(context).qsoDate} : ${formatQSODate(qso.qsoDate)}, ${formatQSOTime(qso.timeOn)}',
+            '${localization.qsoDate} : ${formatQSODate(qso.qsoDate)}, ${formatQSOTime(qso.timeOn)}',
             style: style,
           ),
           Text(
-            '${AppLocalizations.of(context).band} : ${qso.band}',
+            '${localization.band} : ${qso.band}',
             style: style,
           ),
           Text(
-            '${AppLocalizations.of(context).mode} : ${qso.mode}',
+            '${localization.mode} : ${qso.mode}',
             style: style,
           ),
           qso.rstSent.isNotEmpty
               ? Text(
-                  '${AppLocalizations.of(context).rstSent} : ${qso.rstSent}',
+                  '${localization.rstSent} : ${qso.rstSent}',
                   style: style,
                 )
               : emptyPlace,
           qso.rstRcvd.isNotEmpty
               ? Text(
-                  '${AppLocalizations.of(context).rstRcvd} : ${qso.rstRcvd}',
+                  '${localization.rstRcvd} : ${qso.rstRcvd}',
                   style: style,
                 )
               : emptyPlace,
           qso.name.isNotEmpty
               ? Text(
-                  '${AppLocalizations.of(context).name} : ${qso.name}',
+                  '${localization.name} : ${qso.name}',
                   style: style,
                 )
               : emptyPlace,
           qso.qth.isNotEmpty
               ? Text(
-                  '${AppLocalizations.of(context).qth} : ${qso.qth}',
+                  '${localization.qth} : ${qso.qth}',
                   style: style,
                 )
               : emptyPlace,
           qso.comment.isNotEmpty
               ? Text(
-                  '${AppLocalizations.of(context).comment} : ${qso.comment}',
+                  '${localization.comment} : ${qso.comment}',
                   style: style,
                 )
               : emptyPlace,

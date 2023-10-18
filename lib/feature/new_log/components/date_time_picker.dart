@@ -5,9 +5,11 @@ class DateTimeField extends StatefulWidget {
   final void Function(DateTime?) onSetDateTime;
   final String hintText;
   final DateTime firstDate;
+  final String? Function(String?)? validator;
 
   const DateTimeField(
       {Key? key,
+      this.validator,
       required this.onSetDateTime,
       required this.hintText,
       required this.firstDate,
@@ -51,10 +53,11 @@ class _DateTimeFieldState extends State<DateTimeField> {
       children: [
         Padding(
           padding: const EdgeInsets.all(5),
-          child: TextField(
+          child: TextFormField(
             readOnly: true,
+            validator: widget.validator,
             decoration: InputDecoration(
-              hintText: widget.hintText,
+              labelText: widget.hintText,
               contentPadding: const EdgeInsets.symmetric(vertical: 5),
             ),
             controller: dateRangeController,

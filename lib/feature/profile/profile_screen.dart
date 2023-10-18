@@ -18,6 +18,7 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final localization = AppLocalizations.of(context);
     final state = ref.watch(profileProvider);
     final manager = di.profileManager;
 
@@ -34,58 +35,54 @@ class ProfileScreen extends ConsumerWidget {
                 TextField(
                   controller: manager.controller,
                   onChanged: manager.setCallsign,
-                  decoration: InputDecoration(
-                      labelText: AppLocalizations.of(context).operator),
+                  decoration: InputDecoration(labelText: localization.operator),
                 ),
                 Autocomplete<Mode>(
                   initialValue: TextEditingValue(
                       text: state.mode.toString().toLowerCase()),
-                  optionsBuilder: (TextEditingValue value) =>
-                      Mode.values.where(
-                            (Mode mode) => mode.toString().toLowerCase().startsWith(
+                  optionsBuilder: (TextEditingValue value) => Mode.values.where(
+                    (Mode mode) => mode.toString().toLowerCase().startsWith(
                           value.text.toLowerCase(),
                         ),
-                      ),
+                  ),
                   displayStringForOption: (Mode mode) =>
                       mode.toString().toLowerCase(),
                   fieldViewBuilder: (BuildContext context,
-                      TextEditingController fieldTextEditingController,
-                      FocusNode fieldFocusNode,
-                      VoidCallback onFieldSubmitted) =>
+                          TextEditingController fieldTextEditingController,
+                          FocusNode fieldFocusNode,
+                          VoidCallback onFieldSubmitted) =>
                       TextFormField(
-                        decoration: InputDecoration(
-                            labelText: AppLocalizations.of(context).default_mode),
-                        controller: fieldTextEditingController,
-                        focusNode: fieldFocusNode,
-                      ),
+                    decoration:
+                        InputDecoration(labelText: localization.default_mode),
+                    controller: fieldTextEditingController,
+                    focusNode: fieldFocusNode,
+                  ),
                   onSelected: manager.setMode,
                 ),
                 Autocomplete<Band>(
                   initialValue: TextEditingValue(
                       text: state.band.toString().toLowerCase()),
-                  optionsBuilder: (TextEditingValue value) =>
-                      Band.values.where(
-                            (Band band) => band.toString().toLowerCase().startsWith(
+                  optionsBuilder: (TextEditingValue value) => Band.values.where(
+                    (Band band) => band.toString().toLowerCase().startsWith(
                           value.text.toLowerCase(),
                         ),
-                      ),
+                  ),
                   displayStringForOption: (Band band) =>
                       band.toString().toLowerCase(),
                   fieldViewBuilder: (BuildContext context,
-                      TextEditingController fieldTextEditingController,
-                      FocusNode fieldFocusNode,
-                      VoidCallback onFieldSubmitted) =>
+                          TextEditingController fieldTextEditingController,
+                          FocusNode fieldFocusNode,
+                          VoidCallback onFieldSubmitted) =>
                       TextFormField(
-                        decoration: InputDecoration(
-                            labelText: AppLocalizations.of(context).default_band),
-                        controller: fieldTextEditingController,
-                        focusNode: fieldFocusNode,
-                      ),
+                    decoration:
+                        InputDecoration(labelText: localization.default_band),
+                    controller: fieldTextEditingController,
+                    focusNode: fieldFocusNode,
+                  ),
                   onSelected: manager.setBand,
                 ),
                 DropdownButtonFormField<String>(
-                  decoration: InputDecoration(
-                      labelText: AppLocalizations.of(context).language),
+                  decoration: InputDecoration(labelText: localization.language),
                   value: state.locale,
                   items: locales
                       .map(
@@ -102,8 +99,7 @@ class ProfileScreen extends ConsumerWidget {
                   onChanged: manager.setLocale,
                 ),
                 DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context).theme),
+                    decoration: InputDecoration(labelText: localization.theme),
                     value: state.theme,
                     items: _themeList(themes.keys),
                     onChanged: manager.setTheme),
@@ -118,7 +114,11 @@ class ProfileScreen extends ConsumerWidget {
 
 List<DropdownMenuItem<String>> _themeList(Iterable<String> options) {
   return options
-      .map((option) =>
-          DropdownMenuItem<String>(value: option, child: Text(option)))
+      .map(
+        (option) => DropdownMenuItem<String>(
+          value: option,
+          child: Text(option),
+        ),
+      )
       .toList();
 }
