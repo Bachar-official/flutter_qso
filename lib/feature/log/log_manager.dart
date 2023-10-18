@@ -1,6 +1,8 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:filepicker_windows/filepicker_windows.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qso/app/routing.dart';
+import 'package:flutter_qso/data/utils/parse_adi.dart';
 import 'dart:io' show Platform, File;
 import 'package:flutter_qso/feature/log/log_state_holder.dart';
 import 'package:share_plus/share_plus.dart';
@@ -30,6 +32,11 @@ class LogManager {
 
   void addQSO(QSO qso) {
     List<QSO> newLog = [...holder.logState.log, qso];
+    setQSO(newLog);
+  }
+
+  void addAllQSO(List<QSO> qsos) {
+    List<QSO> newLog = [...holder.logState.log, ...qsos];
     setQSO(newLog);
   }
 
@@ -64,6 +71,16 @@ class LogManager {
   void goToNewLogPage() {
     BuildContext context = navKey.currentState!.context;
     Navigator.pushNamed(context, AppRouter.newQsoScreen);
+  }
+
+  Future<void> import() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      File adiFile = File(result.files.single.path!);
+      String fileContent = adiFile.readAsStringSync();
+      List<QSO> newQSOs = parseAdiFile(fileContent);
+      addAllQSO(newQSOs);
+    }
   }
 
   void share() {

@@ -23,6 +23,7 @@ class LogCard extends StatelessWidget {
           child: Column(
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
@@ -37,7 +38,10 @@ class LogCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Report(isSent: true, report: qso.rstSent),
-                  Text(qso.call, style: const TextStyle(fontSize: 20),),
+                  Text(
+                    qso.call,
+                    style: const TextStyle(fontSize: 20),
+                  ),
                   Report(isSent: false, report: qso.rstRcvd),
                 ],
               ),
@@ -48,7 +52,8 @@ class LogCard extends StatelessWidget {
                       icon: const Icon(Icons.radio),
                       text:
                           '${qso.band.toString().toUpperCase()}, ${qso.mode.toString().toUpperCase()}'),
-                  TextIcon(icon: const Icon(Icons.location_city), text: qso.qth),
+                  TextIcon(
+                      icon: const Icon(Icons.location_city), text: qso.qth),
                 ],
               ),
             ],

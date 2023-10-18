@@ -183,4 +183,10 @@ enum Mode {
 
   @override
   String toString() => name;
+
+  static Mode fromString(String str) {
+    return Mode.values.firstWhere(
+        (element) => str.toLowerCase() == element.toString(),
+        orElse: () => Mode.fm);
+  }
 }
